@@ -18,7 +18,7 @@ import com.cybage.service.UserServiceImpl;
  */
 @WebServlet("/UserController")
 public class UserController extends HttpServlet {
-	private UserService userService = new UserServiceImpl();
+	private UserService userService= new UserServiceImpl();
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -33,16 +33,25 @@ public class UserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<User>userList=userService.getAllUsers();
-		System.out.println(userList);
+//		List<User> userlist= userService.getAllUsers();
+//		System.out.println(userlist);
+		
+		if(request.getParameter("user-email")!=null) {
+			String firstName=request.getParameter("first-name");
+			System.out.println(firstName);
+			String lastName=request.getParameter("last-name");
+			String email=request.getParameter("user-email");
+			String password=request.getParameter("user-password");
+			String mobile=request.getParameter("user-mobile");
+			User user= new User(firstName, lastName, email, password, mobile);
+			userService.addUser(user);
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+		}
 		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

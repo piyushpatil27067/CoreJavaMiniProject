@@ -1,10 +1,10 @@
-package com.cybage.service;
+package com.cybage.dao;
 
 import java.util.List;
 
 import com.cybage.model.User;
 
-public interface UserService {
+public interface IUserDAO {
 	List<User> getAllUsers();
 	boolean addUser(User user);
 	boolean checkUser(String email, String password);
